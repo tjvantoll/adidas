@@ -3,27 +3,27 @@ import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { NativeScriptUIListViewModule } from "nativescript-telerik-ui/listview/angular";
 
-import { CarDetailComponent } from "./car-detail/car-detail.component";
-import { CarListComponent } from "./car-list.component";
-import { CarsRoutingModule } from "./cars-routing.module";
-import { CarService } from "./shared/car.service";
+import { ProductDetailComponent } from "./product-detail/product-detail.component";
+import { ProductListComponent } from "./product-list.component";
+import { ProductsRoutingModule } from "./products-routing.module";
+import { ProductService } from "./shared/product.service";
 
 @NgModule({
     imports: [
-        CarsRoutingModule,
+        ProductsRoutingModule,
         NativeScriptModule,
         NativeScriptFormsModule,
         NativeScriptUIListViewModule
     ],
     declarations: [
-        CarListComponent,
-        CarDetailComponent
+        ProductListComponent,
+        ProductDetailComponent
     ],
     providers: [
-        CarService
+        ProductService
     ],
     schemas: [
         NO_ERRORS_SCHEMA
     ]
 })
-export class CarsModule { }
+export class ProductsModule { }

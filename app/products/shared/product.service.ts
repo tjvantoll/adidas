@@ -4,25 +4,25 @@ import { BehaviorSubject, Observable } from "rxjs/Rx";
 
 import { Kinvey } from "kinvey-nativescript-sdk";
 import { Config } from "../../shared/config";
-import { Car } from "./car.model";
+import { Product } from "./product.model";
 
 import * as fs from "file-system";
 
 var imageSource = require("image-source");
 @Injectable()
-export class CarService {
-    private allCars: Array<Car> = [];
-    private carsStore = Kinvey.DataStore.collection<Car>("Product");
+export class ProductService {
+    private allProducts: Array<Product> = [];
+    private productsStore = Kinvey.DataStore.collection<Product>("Product");
 
     constructor(private _ngZone: NgZone) { }
 
-    getCarById(id: string) {
+    getProductById(id: string) {
         if (!id) {
             return;
         }
 
-        return this.allCars.filter((car) => {
-            return car._id === id;
+        return this.allProducts.filter((product) => {
+            return product._id === id;
         })[0];
     }
 
@@ -31,22 +31,22 @@ export class CarService {
             this.login().then(() => {
                 return this.syncDataStore();
             }).then(() => {
-                const stream = this.carsStore.find();
+                const stream = this.productsStore.find();
 
                 return stream.toPromise();
             }).then((data) => {
-                this.allCars = [];
-                data.forEach((car) => {
-                    this.allCars.push(new Car(car));
+                this.allProducts = [];
+                data.forEach((product) => {
+                    this.allProducts.push(new Product(product));
                 });
 
-                observer.next(this.allCars);
+                observer.next(this.allProducts);
             }).catch(this.handleErrors);
         });
     }
 
-    update(editObject: Car) {
-        return this.carsStore.save(editObject);
+    update(editObject: Product) {
+        return this.productsStore.save(editObject);
     }
 
     uploadImage(remoteFullPath: string, localFullPath: string) {
@@ -63,13 +63,13 @@ export class CarService {
     }
 
     private syncDataStore() {
-        return this.carsStore.pendingSyncEntities().then((pendingEntities: any[]) => {
+        return this.productsStore.pendingSyncEntities().then((pendingEntities: any[]) => {
             let queue = Promise.resolve();
 
             if (pendingEntities && pendingEntities.length) {
                 queue = queue
-                    .then(() => this.carsStore.push())
-                    .then((entities: Kinvey.PushResult<Car>[]) => {
+                    .then(() => this.productsStore.push())
+                    .then((entities: Kinvey.PushResult<Product>[]) => {
 
                         /* ***********************************************************
                         * Each item in the array of pushed entities will look like the following
@@ -96,7 +96,6 @@ export class CarService {
 
 
     private handleErrors(error: Response) {
-        console.log("nope");
         console.log(error);
 
         return Observable.throw(error);

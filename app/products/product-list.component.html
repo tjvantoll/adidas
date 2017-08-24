@@ -3,22 +3,22 @@
 </ActionBar>
 
 <GridLayout class="page">
-    <RadListView [items]="cars" (itemTap)="onCarItemTap($event)" class="list-group">
-        <ng-template tkListItemTemplate let-car="item">
+    <RadListView [items]="products" (itemTap)="onProductItemTap($event)" class="list-group">
+        <ng-template tkListItemTemplate let-product="item">
             <StackLayout class="list-group-item">
                 <GridLayout rows="*, *, *" columns="*, *" class="list-group-item-content">
-                    <Label [text]="car.name" class="text-primary"></Label>
+                    <Label [text]="product.name" class="text-primary"></Label>
                     <Label col="1" horizontalAlignment="right" class="list-group-item-text m-r-5">
                         <FormattedString>
                             <Span text="$"></Span>
-                            <Span [text]="car.price"></Span>
+                            <Span [text]="product.price"></Span>
                         </FormattedString>
                     </Label>
 
                     <StackLayout row="1" class="hr-light m-t-5 m-b-5" colSpan="2"></StackLayout>
 
-                    <Image row="2" [src]="car.imageSource" class="m-r-5" height="120"></Image>
-                    <Label row="2" col="1" [text]="car.description"></Label>
+                    <Image row="2" [src]="product.imageSource" class="m-r-5" height="120"></Image>
+                    <Label row="2" col="1" [text]="product.description"></Label>
                 </GridLayout>
             </StackLayout>
         </ng-template>

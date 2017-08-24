@@ -1,6 +1,6 @@
 import { Kinvey } from "kinvey-nativescript-sdk";
 
-export class Car implements Kinvey.Entity {
+export class Product implements Kinvey.Entity {
     _id: string;
     name: string;
     description: string;

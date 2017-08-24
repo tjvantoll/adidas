@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { PageRoute, RouterExtensions } from "nativescript-angular/router";
 import "rxjs/add/operator/switchMap";
 
-import { Car } from "../shared/car.model";
-import { CarService } from "../shared/car.service";
+import { Product } from "../shared/product.model";
+import { ProductService } from "../shared/product.service";
 
 /* ***********************************************************
 * This is the item details component in the master-detail structure.
@@ -11,15 +11,15 @@ import { CarService } from "../shared/car.service";
 * finds the data item by this parameter and displays the detailed data item information.
 *************************************************************/
 @Component({
-    selector: "CarDetail",
+    selector: "product-detail",
     moduleId: module.id,
-    templateUrl: "./car-detail.component.html"
+    templateUrl: "./product-detail.component.html"
 })
-export class CarDetailComponent implements OnInit {
-    private _car: Car;
+export class ProductDetailComponent implements OnInit {
+    private _product: Product;
 
     constructor(
-        private _carService: CarService,
+        private _productService: ProductService,
         private _pageRoute: PageRoute,
         private _routerExtensions: RouterExtensions
     ) { }
@@ -30,7 +30,7 @@ export class CarDetailComponent implements OnInit {
     * private property that holds it inside the component.
     *************************************************************/
     ngOnInit(): void {
-        let carId = "";
+        let productId = "";
 
         /* ***********************************************************
         * Learn more about how to get navigation parameters in this documentation article:
@@ -39,14 +39,14 @@ export class CarDetailComponent implements OnInit {
         this._pageRoute.activatedRoute
             .switchMap((activatedRoute) => activatedRoute.params)
             .forEach((params) => {
-                carId = params.id;
+                productId = params.id;
             });
 
-        this._car = this._carService.getCarById(carId);
+        this._product = this._productService.getProductById(productId);
     }
 
-    get car(): Car {
-        return this._car;
+    get product(): Product {
+        return this._product;
     }
 
     /* ***********************************************************
@@ -55,7 +55,7 @@ export class CarDetailComponent implements OnInit {
     * correct operation of the native OS back navigation.
     *************************************************************/
     onBackButtonTap(): void {
-        this._routerExtensions.navigate(["/cars"], { clearHistory: true });
+        this._routerExtensions.navigate(["/products"], { clearHistory: true });
     }
 
     /* ***********************************************************
@@ -63,6 +63,6 @@ export class CarDetailComponent implements OnInit {
     * Check out the edit page in the /cars/car-detail-edit folder.
     *************************************************************/
     onEditButtonTap(): void {
-        this._routerExtensions.navigate(["/cars/detail-edit", this._car._id]);
+        this._routerExtensions.navigate(["/products/detail-edit", this._product._id]);
     }
 }
