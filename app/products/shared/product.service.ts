@@ -8,11 +8,11 @@ import { Product } from "./product.model";
 
 import * as fs from "file-system";
 
-var imageSource = require("image-source");
 @Injectable()
 export class ProductService {
     private allProducts: Array<Product> = [];
     private productsStore = Kinvey.DataStore.collection<Product>("Product");
+    private cartStore = Kinvey.DataStore.collection<Product>("ShoppingCart");
 
     constructor(private _ngZone: NgZone) { }
 
@@ -24,6 +24,21 @@ export class ProductService {
         return this.allProducts.filter((product) => {
             return product._id === id;
         })[0];
+    }
+
+    getCart() {
+        return new Observable((observer: any) => {
+            this.login().then(() => {
+                return this.syncDataStore();
+            }).then(() => {
+                const stream = this.cartStore.find();
+
+                return stream.toPromise();
+            }).then((data) => {
+                // TODO: Parse the cart data for just this user’s cart
+                observer.next(data);
+            }).catch(this.handleErrors);
+        });
     }
 
     load(): Observable<any> {
@@ -47,19 +62,6 @@ export class ProductService {
 
     update(editObject: Product) {
         return this.productsStore.save(editObject);
-    }
-
-    uploadImage(remoteFullPath: string, localFullPath: string) {
-        let imageFile = fs.File.fromPath(localFullPath);
-        let binarySource = imageFile.readSync(err => { console.log("Error reading binary:" + err); });
-
-        const metadata = {
-            filename: 'image.jpg',
-            mimeType: 'image/jpeg',
-            public: true
-        };
-
-        return Kinvey.Files.upload(imageFile, metadata);
     }
 
     private syncDataStore() {
@@ -87,6 +89,7 @@ export class ProductService {
     }
 
     private login(): Promise<any> {
+        
         if (!!Kinvey.User.getActiveUser()) {
             return Promise.resolve();
         } else {
