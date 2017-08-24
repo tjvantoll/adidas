@@ -12,7 +12,7 @@ var imageSource = require("image-source");
 @Injectable()
 export class CarService {
     private allCars: Array<Car> = [];
-    private carsStore = Kinvey.DataStore.collection<Car>("cars");
+    private carsStore = Kinvey.DataStore.collection<Car>("Product");
 
     constructor(private _ngZone: NgZone) { }
 

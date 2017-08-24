@@ -1,22 +1,16 @@
 <ActionBar class="action-bar">
-    <Label class="action-bar-title" text="Browse" horizontalAlignment="center"></Label>
+    <Label class="action-bar-title" text="Products" horizontalAlignment="center"></Label>
 </ActionBar>
 
 <GridLayout class="page">
     <RadListView [items]="cars" (itemTap)="onCarItemTap($event)" class="list-group">
-    <!--
-    RadListView is a UI component part of the Progress NativeScript UI set of components.
-    Learn more about the RadListView UI component and how it can be customized in this documentation article:
-    http://docs.telerik.com/devtools/nativescript-ui/Controls/Angular/ListView/getting-started
-    This component is used to display the master list in the master-detail structure.
-    -->
         <ng-template tkListItemTemplate let-car="item">
             <StackLayout class="list-group-item">
                 <GridLayout rows="*, *, *" columns="*, *" class="list-group-item-content">
                     <Label [text]="car.name" class="text-primary"></Label>
                     <Label col="1" horizontalAlignment="right" class="list-group-item-text m-r-5">
                         <FormattedString>
-                            <Span text="&euro;"></Span>
+                            <Span text="$"></Span>
                             <Span [text]="car.price"></Span>
                             <Span text="/day"></Span>
                         </FormattedString>
