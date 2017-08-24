@@ -48,4 +48,8 @@ export class ProductListComponent implements OnInit {
 
         this._routerExtensions.navigate(["/products/detail", tappedProductItem._id]);
     }
+
+    onCartTap() {
+        this._routerExtensions.navigate(["/products/cart"]);
+    }
 }

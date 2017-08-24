@@ -1,5 +1,9 @@
-<ActionBar class="action-bar">
-    <Label class="action-bar-title" text="Products" horizontalAlignment="center"></Label>
+<ActionBar class="action-bar" title="Products">
+    <ActionItem ios.position="right">
+        <StackLayout>
+            <Label text="&#xf07a;" class="fa" (tap)="onCartTap()"></Label>
+        </StackLayout>
+    </ActionItem>
 </ActionBar>
 
 <GridLayout class="page">
