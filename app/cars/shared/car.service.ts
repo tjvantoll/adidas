@@ -28,7 +28,6 @@ export class CarService {
 
     load(): Observable<any> {
         return new Observable((observer: any) => {
-
             this.login().then(() => {
                 return this.syncDataStore();
             }).then(() => {
@@ -52,7 +51,7 @@ export class CarService {
 
     uploadImage(remoteFullPath: string, localFullPath: string) {
         let imageFile = fs.File.fromPath(localFullPath);
-        let binarySource = imageFile.readSync(err => { console.log("Error raeding binary:" + err); });
+        let binarySource = imageFile.readSync(err => { console.log("Error reading binary:" + err); });
 
         const metadata = {
             filename: 'image.jpg',
@@ -95,7 +94,9 @@ export class CarService {
         }
     }
 
+
     private handleErrors(error: Response) {
+        console.log("nope");
         console.log(error);
 
         return Observable.throw(error);
