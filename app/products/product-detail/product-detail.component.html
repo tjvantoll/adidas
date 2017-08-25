@@ -4,7 +4,7 @@
     <Label class="action-bar-title" [text]="product.name" horizontalAlignment="center"></Label>
 </ActionBar>
 
-<GridLayout rows="auto, auto, auto" class="page">
+<GridLayout rows="auto, auto, auto, auto" class="page">
     <Image [src]="product.imageSource" class="m-b-15"></Image>
 
     <GridLayout row="1" rows="*" columns="*,2*">
@@ -17,7 +17,11 @@
         </Label>
     </GridLayout>
 
-    <StackLayout row="2">
+    <StackLayout row="2" class="m-y-10">
         <Label [text]="product.description" class="p-l-15"></Label>
+    </StackLayout>
+
+    <StackLayout row="3">
+        <Button class="btn btn-outline" text="Add to Cart" (tap)="addToCart()"></Button>
     </StackLayout>
 </GridLayout>

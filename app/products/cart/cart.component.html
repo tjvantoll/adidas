@@ -1,5 +1,14 @@
-<ActionBar class="action-bar" title="Cart"></ActionBar>
+<ActionBar class="action-bar" title="Cart">
+    <ActionItem text="Checkout" ios.position="right"></ActionItem>
+</ActionBar>
 
-<StackLayout>
-  <Label text="Oh, hi! I’m a cart 🛒"></Label>
-</StackLayout>
+<GridLayout>
+    <RadListView [items]="cartEntries" class="list-group">
+        <ng-template tkListItemTemplate let-entry="item">
+            <StackLayout class="list-group-item">
+                <Label class="list-group-item-text" [text]="entry.name"></Label>
+            </StackLayout>
+        </ng-template>
+    </RadListView>
+    <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
+</GridLayout>

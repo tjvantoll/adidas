@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from "rxjs/Rx";
 import { Kinvey } from "kinvey-nativescript-sdk";
 import { Config } from "../../shared/config";
 import { Product } from "./product.model";
+import { ShoppingCart } from "./shoppingcart.model";
 
 import * as fs from "file-system";
 
@@ -12,7 +13,10 @@ import * as fs from "file-system";
 export class ProductService {
     private allProducts: Array<Product> = [];
     private productsStore = Kinvey.DataStore.collection<Product>("Product");
-    private cartStore = Kinvey.DataStore.collection<Product>("ShoppingCart");
+    private cartStore = Kinvey.DataStore.collection<ShoppingCart>("ShoppingCart");
+
+    static cart: ShoppingCart;
+    static rootCartId: "599f41707f2a6ba14eb10ff3";
 
     constructor(private _ngZone: NgZone) { }
 
@@ -26,7 +30,7 @@ export class ProductService {
         })[0];
     }
 
-    getCart() {
+    getCart(): Observable<any> {
         return new Observable((observer: any) => {
             this.login().then(() => {
                 return this.syncDataStore();
@@ -35,8 +39,31 @@ export class ProductService {
 
                 return stream.toPromise();
             }).then((data) => {
-                // TODO: Parse the cart data for just this user’s cart
-                observer.next(data);
+                data.forEach((entry) => {
+                    // TODO: Remove this silly hardcoding
+                    console.log("WAT");
+                    if (entry._id == ProductService.rootCartId) {
+                        console.log("Saving off cart");
+                        ProductService.cart = entry;
+                    }
+                });
+                observer.next(new ShoppingCart(ProductService.cart));
+            }).catch(this.handleErrors);
+        });
+    }
+
+    addToCart(productId: string): Observable<any> {
+        console.log("hi");
+        console.log(typeof ProductService.cart);
+        let cart = ProductService.cart;
+        cart.addProduct(productId);
+
+        return new Observable((observer: any) => {
+            this.cartStore.save({
+                _id: ProductService.rootCartId,
+                products: cart
+            }).then((data) => {
+                observer.next({});
             }).catch(this.handleErrors);
         });
     }
@@ -89,7 +116,6 @@ export class ProductService {
     }
 
     private login(): Promise<any> {
-        
         if (!!Kinvey.User.getActiveUser()) {
             return Promise.resolve();
         } else {
