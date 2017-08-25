@@ -41,9 +41,7 @@ export class ProductService {
             }).then((data) => {
                 data.forEach((entry) => {
                     // TODO: Remove this silly hardcoding
-                    console.log("WAT");
                     if (entry._id == ProductService.rootCartId) {
-                        console.log("Saving off cart");
                         ProductService.cart = entry;
                     }
                 });
@@ -53,8 +51,6 @@ export class ProductService {
     }
 
     addToCart(productId: string): Observable<any> {
-        console.log("hi");
-        console.log(typeof ProductService.cart);
         let cart = ProductService.cart;
         cart.addProduct(productId);
 
