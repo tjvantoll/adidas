@@ -39,7 +39,10 @@ export class CartComponent implements OnInit {
                     this.products.forEach((product) => {
                         if (product._id == entry.product_id) {
                             this.cartEntries.push({
-                                name: product.name
+                                name: product.name,
+                                price: product.price,
+                                description: product.description,
+                                imageSource: product.imageSource
                             });
                         }
                     });

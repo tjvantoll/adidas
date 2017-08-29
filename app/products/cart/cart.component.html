@@ -2,13 +2,27 @@
     <ActionItem text="Checkout" ios.position="right"></ActionItem>
 </ActionBar>
 
-<GridLayout>
+<GridLayout class="page">
     <RadListView [items]="cartEntries" class="list-group">
         <ng-template tkListItemTemplate let-entry="item">
             <StackLayout class="list-group-item">
-                <Label class="list-group-item-text" [text]="entry.name"></Label>
+                <GridLayout rows="*, *, *" columns="*, *" class="list-group-item-content">
+                    <Label [text]="entry.description" class="text-primary"></Label>
+                    <Label col="1" horizontalAlignment="right" class="list-group-item-text m-r-5">
+                        <FormattedString>
+                            <Span text="$"></Span>
+                            <Span [text]="entry.price"></Span>
+                        </FormattedString>
+                    </Label>
+            
+                    <StackLayout row="1" class="hr-light m-t-5 m-b-5" colSpan="2"></StackLayout>
+            
+                    <Image row="2" [src]="entry.imageSource" class="m-r-5" height="120"></Image>
+                    <Label row="2" col="1" [text]="entry.description"></Label>
+                </GridLayout>
             </StackLayout>
         </ng-template>
     </RadListView>
+
     <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
 </GridLayout>
