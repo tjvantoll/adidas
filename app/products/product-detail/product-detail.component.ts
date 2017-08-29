@@ -14,13 +14,16 @@ import { ShoppingCartService } from "../shared/shoppingcart.service";
 })
 export class ProductDetailComponent implements OnInit {
     private _product: Product;
+    isLoading;
 
     constructor(
         private _productService: ProductService,
         private _shoppingCartService: ShoppingCartService,
         private _pageRoute: PageRoute,
         private _routerExtensions: RouterExtensions
-    ) { }
+    ) {
+        this.isLoading = false;
+    }
 
     ngOnInit(): void {
         let productId = "";
@@ -42,11 +45,12 @@ export class ProductDetailComponent implements OnInit {
     }
 
     addToCart() {
+        this.isLoading = true;
         this._shoppingCartService.add(this._product._id)
             .subscribe(() => {
-                alert("yes");
+                this.isLoading = false;
             }, () => {
-                alert("no");
+                this.isLoading = false;
             })
     }
 }

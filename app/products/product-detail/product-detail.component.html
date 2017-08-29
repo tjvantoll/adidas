@@ -22,6 +22,8 @@
     </StackLayout>
 
     <StackLayout row="3">
-        <Button class="btn btn-outline" text="Add to Cart" (tap)="addToCart()"></Button>
+        <Button class="btn btn-outline" [text]="isLoading ? '' : 'Add to Cart'" (tap)="addToCart()"></Button>
     </StackLayout>
+
+    <ActivityIndicator row="3" [busy]="isLoading"></ActivityIndicator>
 </GridLayout>
