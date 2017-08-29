@@ -2,10 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { PageRoute, RouterExtensions } from "nativescript-angular/router";
 import "rxjs/add/operator/switchMap";
 
-
 import { Product } from "../shared/product.model";
 import { ProductService } from "../shared/product.service";
 import { ShoppingCart } from "../shared/shoppingcart.model";
+import { ShoppingCartService } from "../shared/shoppingcart.service";
 
 @Component({
     selector: "product-detail",
@@ -17,6 +17,7 @@ export class ProductDetailComponent implements OnInit {
 
     constructor(
         private _productService: ProductService,
+        private _shoppingCartService: ShoppingCartService,
         private _pageRoute: PageRoute,
         private _routerExtensions: RouterExtensions
     ) { }
@@ -41,6 +42,11 @@ export class ProductDetailComponent implements OnInit {
     }
 
     addToCart() {
-        // this._productService.addToCart(this._product._id);
+        this._shoppingCartService.add(this._product._id)
+            .subscribe(() => {
+                alert("yes");
+            }, () => {
+                alert("no");
+            })
     }
 }

@@ -7,6 +7,9 @@ export class ShoppingCart implements Kinvey.Entity {
     constructor(options: any) {
         this._id = options._id;
         this.products = options.products;
+        if (!this.products) {
+            this.products = [];
+        }
     }
 
     addProduct(productId: string) {

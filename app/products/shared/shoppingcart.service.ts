@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
-import { BehaviorSubject, Observable } from "rxjs/Rx";
+import { Subject, Observable } from "rxjs/Rx";
 
 import { Kinvey } from "kinvey-nativescript-sdk";
 import { Config } from "../../shared/config";
@@ -13,38 +13,41 @@ export class ShoppingCartService {
 
     load(): Observable<any> {
       return new Observable((observer: any) => {
-          this.login().then(() => {
-              return this.syncDataStore();
-          }).then(() => {
-              const stream = this.cartStore.find();
+        this.login().then(() => {
+          return this.syncDataStore();
+        }).then(() => {
+          const stream = this.cartStore.find();
 
-              return stream.toPromise();
-          }).then((data) => {
-              var cart;
-              data.forEach((entry) => {
-                  // TODO: Remove this silly hardcoding
-                  if (entry._id == this.rootCartId) {
-                      cart = entry;
-                  }
-              });
-              observer.next(new ShoppingCart(cart));
-          }).catch(this.handleErrors);
-      });
+          return stream.toPromise();
+        }).then((data) => {
+          var cart;
+          
+          data.forEach((entry) => {
+            if (entry._id == this.rootCartId) {
+              cart = entry;
+            }
+          });
+          observer.next(new ShoppingCart(cart));
+        }).catch(this.handleErrors);
+    });
   }
 
-  /*addToCart(productId: string): Observable<any> {
-      let cart = ProductService.cart;
-      cart.addProduct(productId);
+  add(productId: string): Observable<any> {
+    return new Observable((observer: any) => {
+      this.load().subscribe((cart) => {
+        let rootCart = <ShoppingCart>cart;
+        rootCart.addProduct(productId);
 
-      return new Observable((observer: any) => {
-          this.cartStore.save({
-              _id: ProductService.rootCartId,
-              products: cart
-          }).then((data) => {
-              observer.next({});
-          }).catch(this.handleErrors);
+        this.cartStore.save({
+          _id: this.rootCartId,
+          products: rootCart.products
+        }).then((data) => {
+          observer.next(cart);
+        }).catch(this.handleErrors);
       });
-  }*/
+    });
+  }
+
 
   private syncDataStore() {
     return this.cartStore.pendingSyncEntities().then((pendingEntities: any[]) => {
