@@ -8,8 +8,8 @@ import { ShoppingCart } from "./shoppingcart.model";
 
 @Injectable()
 export class ShoppingCartService {
-    private cartStore = Kinvey.DataStore.collection<ShoppingCart>("ShoppingCart");
-    private rootCartId = "599f41707f2a6ba14eb10ff3";
+    private cartStore = Kinvey.DataStore.collection<ShoppingCart>("ShoppingCart2");
+    private rootCartId = "59a5951f6e911be44f0e266a";
 
     load(): Observable<any> {
       return new Observable((observer: any) => {
