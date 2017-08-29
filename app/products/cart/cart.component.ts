@@ -3,6 +3,7 @@ import { ObservableArray } from "data/observable-array";
 
 import { Product } from "../shared/product.model";
 import { ProductService } from "../shared/product.service";
+import { ShoppingCartService } from "../shared/shoppingcart.service";
 
 @Component({
     selector: "product-cart",
@@ -15,7 +16,8 @@ export class CartComponent implements OnInit {
     isLoading: boolean;
 
     constructor(
-        private _productService: ProductService
+        private _productService: ProductService,
+        private _shoppingCartService: ShoppingCartService
     ) {
         this.isLoading = true;
     }
@@ -31,7 +33,7 @@ export class CartComponent implements OnInit {
     }
 
     loadCart() {
-        this._productService.getCart().subscribe(
+        this._shoppingCartService.load().subscribe(
             (cart) => {
                 cart.products.forEach((entry) => {
                     this.products.forEach((product) => {

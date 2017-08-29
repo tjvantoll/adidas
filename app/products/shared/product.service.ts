@@ -1,24 +1,15 @@
-import { Injectable, NgZone } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
 import { BehaviorSubject, Observable } from "rxjs/Rx";
 
 import { Kinvey } from "kinvey-nativescript-sdk";
 import { Config } from "../../shared/config";
 import { Product } from "./product.model";
-import { ShoppingCart } from "./shoppingcart.model";
-
-import * as fs from "file-system";
 
 @Injectable()
 export class ProductService {
     private allProducts: Array<Product> = [];
     private productsStore = Kinvey.DataStore.collection<Product>("Product");
-    private cartStore = Kinvey.DataStore.collection<ShoppingCart>("ShoppingCart");
-
-    static cart: ShoppingCart;
-    static rootCartId: "599f41707f2a6ba14eb10ff3";
-
-    constructor(private _ngZone: NgZone) { }
 
     getProductById(id: string) {
         if (!id) {
@@ -28,40 +19,6 @@ export class ProductService {
         return this.allProducts.filter((product) => {
             return product._id === id;
         })[0];
-    }
-
-    getCart(): Observable<any> {
-        return new Observable((observer: any) => {
-            this.login().then(() => {
-                return this.syncDataStore();
-            }).then(() => {
-                const stream = this.cartStore.find();
-
-                return stream.toPromise();
-            }).then((data) => {
-                data.forEach((entry) => {
-                    // TODO: Remove this silly hardcoding
-                    if (entry._id == ProductService.rootCartId) {
-                        ProductService.cart = entry;
-                    }
-                });
-                observer.next(new ShoppingCart(ProductService.cart));
-            }).catch(this.handleErrors);
-        });
-    }
-
-    addToCart(productId: string): Observable<any> {
-        let cart = ProductService.cart;
-        cart.addProduct(productId);
-
-        return new Observable((observer: any) => {
-            this.cartStore.save({
-                _id: ProductService.rootCartId,
-                products: cart
-            }).then((data) => {
-                observer.next({});
-            }).catch(this.handleErrors);
-        });
     }
 
     load(): Observable<any> {
@@ -81,10 +38,6 @@ export class ProductService {
                 observer.next(this.allProducts);
             }).catch(this.handleErrors);
         });
-    }
-
-    update(editObject: Product) {
-        return this.productsStore.save(editObject);
     }
 
     private syncDataStore() {
@@ -119,10 +72,8 @@ export class ProductService {
         }
     }
 
-
     private handleErrors(error: Response) {
         console.log(error);
-
         return Observable.throw(error);
     }
 }

@@ -8,6 +8,7 @@ import { ProductDetailComponent } from "./product-detail/product-detail.componen
 import { ProductListComponent } from "./product-list.component";
 import { ProductsRoutingModule } from "./products-routing.module";
 import { ProductService } from "./shared/product.service";
+import { ShoppingCartService } from "./shared/shoppingcart.service";
 
 @NgModule({
     imports: [
@@ -22,7 +23,8 @@ import { ProductService } from "./shared/product.service";
         ProductDetailComponent
     ],
     providers: [
-        ProductService
+        ProductService,
+        ShoppingCartService
     ],
     schemas: [
         NO_ERRORS_SCHEMA
