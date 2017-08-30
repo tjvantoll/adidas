@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ObservableArray } from "data/observable-array";
+import { RouterExtensions } from "nativescript-angular/router";
 
 import { Product } from "../shared/product.model";
 import { ProductService } from "../shared/product.service";
@@ -17,7 +18,8 @@ export class CartComponent implements OnInit {
 
     constructor(
         private _productService: ProductService,
-        private _shoppingCartService: ShoppingCartService
+        private _shoppingCartService: ShoppingCartService,
+        private _routerExtensions: RouterExtensions
     ) {
         this.isLoading = true;
     }
@@ -50,5 +52,9 @@ export class CartComponent implements OnInit {
                 this.isLoading = false;
             }
         );
+    }
+
+    checkout() {
+        this._routerExtensions.navigate(["/products/checkout"]);
     }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ObservableArray } from "data/observable-array";
 import { RouterExtensions } from "nativescript-angular/router";
-import { ListViewEventData } from "nativescript-telerik-ui/listview";
+import { ListViewEventData } from "nativescript-telerik-ui-pro/listview";
 
 import { Product } from "./shared/product.model";
 import { ProductService } from "./shared/product.service";
