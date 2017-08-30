@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { PageRoute, RouterExtensions } from "nativescript-angular/router";
 import "rxjs/add/operator/switchMap";
+import { ObservableArray } from "data/observable-array";
 
 import { Product } from "../shared/product.model";
 import { ProductService } from "../shared/product.service";
@@ -15,6 +16,14 @@ import { ShoppingCartService } from "../shared/shoppingcart.service";
 export class ProductDetailComponent implements OnInit {
     private _product: Product;
     isLoading;
+
+    reviews = new ObservableArray([
+        { Country: "Germany", Amount: 15 },
+        { Country: "France", Amount: 13 },
+        { Country: "Bulgaria", Amount: 24 },
+        { Country: "Spain", Amount: 11 },
+        { Country: "USA", Amount: 180 }
+    ]);
 
     constructor(
         private _productService: ProductService,

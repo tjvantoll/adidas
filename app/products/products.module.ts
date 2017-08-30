@@ -1,8 +1,9 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
-import { NativeScriptUIListViewModule } from "nativescript-telerik-ui-pro/listview/angular";
+import { NativeScriptUIChartModule } from "nativescript-telerik-ui-pro/chart/angular";
 import { NativeScriptUIDataFormModule } from "nativescript-telerik-ui-pro/dataform/angular";
+import { NativeScriptUIListViewModule } from "nativescript-telerik-ui-pro/listview/angular";
 
 import { ProductsRoutingModule } from "./products-routing.module";
 
@@ -19,8 +20,9 @@ import { ShoppingCartService } from "./shared/shoppingcart.service";
         ProductsRoutingModule,
         NativeScriptModule,
         NativeScriptFormsModule,
-        NativeScriptUIListViewModule,
-        NativeScriptUIDataFormModule
+        NativeScriptUIDataFormModule,
+        NativeScriptUIChartModule,
+        NativeScriptUIListViewModule
     ],
     declarations: [
         CartComponent,

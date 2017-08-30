@@ -4,26 +4,37 @@
     <Label class="action-bar-title" [text]="product.name" horizontalAlignment="center"></Label>
 </ActionBar>
 
-<GridLayout rows="auto, auto, auto, auto" class="page">
-    <Image [src]="product.imageSource" class="m-b-15"></Image>
+<ScrollView>
+    <StackLayout class="page">
+        <Image [src]="product.imageSource" class="m-b-15"></Image>
 
-    <GridLayout row="1" rows="*" columns="*,2*">
-        <Label text="Price" class="p-l-15 p-b-10 text-secondary"></Label>
-        <Label col="1" class="text p-b-10">
-            <FormattedString>
-                <Span text="$"></Span>
-                <Span [text]="product.price"></Span>
-            </FormattedString>
-        </Label>
-    </GridLayout>
+        <GridLayout rows="*" columns="*,2*">
+            <Label text="Price" class="p-l-15 p-b-10 text-secondary"></Label>
+            <Label col="1" class="text p-b-10">
+                <FormattedString>
+                    <Span text="$"></Span>
+                    <Span [text]="product.price"></Span>
+                </FormattedString>
+            </Label>
+        </GridLayout>
 
-    <StackLayout row="2" class="m-y-10">
-        <Label [text]="product.description" class="p-l-15"></Label>
+        <StackLayout class="m-y-10">
+            <Label [text]="product.description" class="p-l-15" textWrap="true"></Label>
+        </StackLayout>
+
+        <StackLayout>
+            <Button class="btn btn-outline" [text]="isLoading ? '' : 'Add to Cart'" (tap)="addToCart()"></Button>
+        </StackLayout>
+
+        <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
+
+        <Label class="p-l-15 p-b-10 h2" text="Reviews" textDecoration="underline"></Label>
+        <RadCartesianChart height="500">
+            <CategoricalAxis tkCartesianHorizontalAxis></CategoricalAxis>
+            <LinearAxis tkCartesianVerticalAxis></LinearAxis>
+        
+            <BarSeries tkCartesianSeries [items]="reviews" categoryProperty="Country" valueProperty="Amount"></BarSeries>
+            <RadCartesianChartGrid tkCartesianGrid></RadCartesianChartGrid>
+        </RadCartesianChart>
     </StackLayout>
-
-    <StackLayout row="3">
-        <Button class="btn btn-outline" [text]="isLoading ? '' : 'Add to Cart'" (tap)="addToCart()"></Button>
-    </StackLayout>
-
-    <ActivityIndicator row="3" [busy]="isLoading"></ActivityIndicator>
-</GridLayout>
+</ScrollView>
