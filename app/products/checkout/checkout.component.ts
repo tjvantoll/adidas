@@ -10,12 +10,12 @@ import { Component } from "@angular/core";
 <ScrollView>
     <StackLayout class="page">
         <Label text="Please complete the following information to submit your order." class="m-10 m-b-20" fontSize="16" textWrap="true"></Label>
-        <GridLayout>
         <RadDataForm tkExampleTitle tkToggleNavButton [source]="person">
             <TKEntityProperty tkDataFormProperty
                 name="name"
                 displayName="Name:"
                 index="0">
+            <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Please provide a name."></TKNonEmptyValidator>
             </TKEntityProperty>
             <TKEntityProperty tkDataFormProperty
                 name="address"
@@ -42,7 +42,6 @@ import { Component } from "@angular/core";
                 <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
             </TKEntityProperty>
         </RadDataForm>
-        </GridLayout>
         <Button class="btn" text="Submit order"></Button>
     </StackLayout>
 </ScrollView>
