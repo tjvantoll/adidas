@@ -22,18 +22,17 @@
             <Label [text]="product.description" class="p-l-15" textWrap="true"></Label>
         </StackLayout>
 
-        <StackLayout>
+        <GridLayout>
             <Button class="btn btn-outline" [text]="isLoading ? '' : 'Add to Cart'" (tap)="addToCart()"></Button>
-        </StackLayout>
-
-        <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
+            <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
+        </GridLayout>
 
         <Label class="p-l-15 p-b-10 h2" text="Reviews" textDecoration="underline"></Label>
-        <RadCartesianChart height="500">
+        <RadCartesianChart height="300">
             <CategoricalAxis tkCartesianHorizontalAxis></CategoricalAxis>
             <LinearAxis tkCartesianVerticalAxis></LinearAxis>
         
-            <BarSeries tkCartesianSeries [items]="reviews" categoryProperty="Country" valueProperty="Amount"></BarSeries>
+            <BarSeries tkCartesianSeries [items]="reviews" categoryProperty="Rating" valueProperty="Amount"></BarSeries>
             <RadCartesianChartGrid tkCartesianGrid></RadCartesianChartGrid>
         </RadCartesianChart>
     </StackLayout>

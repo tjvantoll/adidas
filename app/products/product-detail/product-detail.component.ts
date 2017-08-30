@@ -17,12 +17,13 @@ export class ProductDetailComponent implements OnInit {
     private _product: Product;
     isLoading;
 
+    // Randomize review data for demo purposes
     reviews = new ObservableArray([
-        { Country: "Germany", Amount: 15 },
-        { Country: "France", Amount: 13 },
-        { Country: "Bulgaria", Amount: 24 },
-        { Country: "Spain", Amount: 11 },
-        { Country: "USA", Amount: 180 }
+        { Rating: "1 ⭐", Amount: Math.floor(Math.random() * 20) },
+        { Rating: "2 ⭐", Amount: Math.floor(Math.random() * 20) },
+        { Rating: "3 ⭐", Amount: Math.floor(Math.random() * 20) },
+        { Rating: "4 ⭐", Amount: Math.floor(Math.random() * 20) },
+        { Rating: "5 ⭐", Amount: Math.floor(Math.random() * 20) }
     ]);
 
     constructor(

@@ -8,21 +8,23 @@
 
 <GridLayout class="page">
     <RadListView [items]="products" (itemTap)="onProductItemTap($event)" class="list-group">
+        <ListViewGridLayout tkListViewLayout scrollDirection="Vertical" itemHeight="200" spanCount="2"></ListViewGridLayout>
         <ng-template tkListItemTemplate let-product="item">
             <StackLayout class="list-group-item">
-                <GridLayout rows="*, *, *" columns="*, *" class="list-group-item-content">
-                    <Label [text]="product.name" class="text-primary"></Label>
-                    <Label col="1" horizontalAlignment="right" class="list-group-item-text m-r-5">
+                <GridLayout rows="20, 15, 165" columns="3*, *" class="list-group-item-content">
+                    <Label col="0" row="0" [text]="product.name" class="text-primary"></Label>
+                    <Label col="1" row="0" horizontalAlignment="right" class="list-group-item-text m-r-5">
                         <FormattedString>
                             <Span text="$"></Span>
                             <Span [text]="product.price"></Span>
                         </FormattedString>
                     </Label>
 
-                    <StackLayout row="1" class="hr-light m-t-5 m-b-5" colSpan="2"></StackLayout>
+                    <StackLayout row="1" colSpan="2" class="hr-light m-t-5 m-b-5"></StackLayout>
 
-                    <Image row="2" [src]="product.imageSource" class="m-r-5" height="120"></Image>
-                    <Label row="2" col="1" [text]="product.description"></Label>
+                    <StackLayout row="2" colSpan="2">
+                        <Image [src]="product.imageSource"height="154"></Image>
+                    </StackLayout>
                 </GridLayout>
             </StackLayout>
         </ng-template>
