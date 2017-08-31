@@ -15,6 +15,9 @@ import { CheckoutComponent } from "./checkout/checkout.component";
 import { ProductService } from "./shared/product.service";
 import { ShoppingCartService } from "./shared/shoppingcart.service";
 
+import {TNSFontIconModule, TNSFontIconService, TNSFontIconPipe, TNSFontIconPurePipe} from 'nativescript-ngx-fonticon';
+
+
 @NgModule({
     imports: [
         ProductsRoutingModule,
@@ -22,7 +25,10 @@ import { ShoppingCartService } from "./shared/shoppingcart.service";
         NativeScriptFormsModule,
         NativeScriptUIDataFormModule,
         NativeScriptUIChartModule,
-        NativeScriptUIListViewModule
+        NativeScriptUIListViewModule,
+        TNSFontIconModule.forRoot({
+            'fa': 'fonts/font-awesome.css'
+        })
     ],
     declarations: [
         CartComponent,

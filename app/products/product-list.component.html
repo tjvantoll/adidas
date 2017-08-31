@@ -1,12 +1,13 @@
-<ActionBar class="action-bar" title="Products">
-    <ActionItem ios.position="right" text="Cart" (tap)="onCartTap()"></ActionItem>
+<ActionBar class="action-bar">
+    <ActionItem ios.position="right" [text]="'fa-shopping-cart' | fonticon" (tap)="onCartTap()" class="fa"></ActionItem>
+    <Label class="action-bar-title" text="Products" horizontalAlignment="center"></Label>
 </ActionBar>
 
 <GridLayout class="page">
     <RadListView [items]="products" (itemTap)="onProductItemTap($event)" class="list-group">
         <ListViewGridLayout tkListViewLayout scrollDirection="Vertical" itemHeight="200" spanCount="2"></ListViewGridLayout>
         <ng-template tkListItemTemplate let-product="item">
-            <StackLayout class="list-group-item">
+            <StackLayout class="product-card list-group-item">
                 <GridLayout rows="20, 15, 165" columns="3*, *" class="list-group-item-content">
                     <Label col="0" row="0" [text]="product.name" class="text-primary"></Label>
                     <Label col="1" row="0" horizontalAlignment="right" class="list-group-item-text m-r-5">

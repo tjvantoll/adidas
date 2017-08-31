@@ -27,6 +27,7 @@
     "kinvey-nativescript-sdk": "^3.7.2",
     "nativescript-angular": "~4.2.0",
     "nativescript-custom-entitlements": "0.2.0",
+    "nativescript-ngx-fonticon": "^2.2.3",
     "nativescript-imagepicker": "^3.0.6",
     "nativescript-permissions": "^1.2.3",
     "nativescript-telerik-ui-pro": "^3.0.4",

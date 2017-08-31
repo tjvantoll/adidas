@@ -15,19 +15,30 @@
 // Place any CSS rules you want to apply on both iOS and Android here.
 // This is where the vast majority of your CSS code goes.
 
-//Font icon
+
+/*fonticon*/
 .fa {
-   font-family: "FontAwesome";
+  font-family: FontAwesome, fontawesome-webfont;
 }
+
 //Action bar
 .action-item,
 NavigationButton {
     color: $ab-color;
+
 }
 
 Slider{
   background-color: $accent;
   color: $accent;  
+}
+
+.action-bar, .action-bar-title {
+    font-family: "Comfortaa";
+}
+
+Label {
+    font-family: "Comfortaa";
 }
 
 .text {
