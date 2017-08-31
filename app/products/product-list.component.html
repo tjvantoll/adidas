@@ -7,25 +7,20 @@
     <RadListView [items]="products" (itemTap)="onProductItemTap($event)" class="list-group" (itemLoading)="changeBackground($event)">
         <ListViewGridLayout tkListViewLayout scrollDirection="Vertical" itemHeight="200" spanCount="2"></ListViewGridLayout>
         <ng-template tkListItemTemplate let-product="item">
-            <StackLayout class="product-card list-group-item">
-                <GridLayout rows="20, 15, 165" columns="3*, *" class="list-group-item-content">
+            <StackLayout class="product-card">
+                <Image [src]="product.imageSource" height="154"></Image>
+                <StackLayout row="1" colSpan="2" class="hr-light m-t-5 m-b-5"></StackLayout>
+                <GridLayout rows="20, 15" columns="3*, auto">
                     <Label col="0" row="0" [text]="product.name" class="text-primary"></Label>
-                    <Label col="1" row="0" horizontalAlignment="right" class="list-group-item-text m-r-5">
-                        <FormattedString>
-                            <Span text="$"></Span>
-                            <Span [text]="product.price"></Span>
-                        </FormattedString>
-                    </Label>
-
-                    <StackLayout row="1" colSpan="2" class="hr-light m-t-5 m-b-5"></StackLayout>
-
-                    <StackLayout row="2" colSpan="2">
-                        <Image [src]="product.imageSource"height="154"></Image>
-                    </StackLayout>
+                    <Label col="1" row="0" horizontalAlignment="left" class="list-group-item-text m-r-5">
+                            <FormattedString>
+                                <Span text="$"></Span>
+                                <Span [text]="product.price"></Span>
+                            </FormattedString>
+                        </Label>
                 </GridLayout>
             </StackLayout>
         </ng-template>
     </RadListView>
-
     <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
 </GridLayout>

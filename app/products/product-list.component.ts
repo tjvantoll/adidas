@@ -58,7 +58,7 @@ export class ProductListComponent implements OnInit {
     changeBackground(args){
         if (isIOS) {
             // A lovely pink 😄
-            var newcolor = new Color(20,255,56,89);
+            var newcolor = new Color(100,211,211,211);
             args.ios.backgroundView.backgroundColor = newcolor.ios;
         }
     }
