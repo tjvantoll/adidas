@@ -7,7 +7,7 @@
         <ng-template tkListItemTemplate let-entry="item">
             <StackLayout class="list-group-item">
                 <GridLayout rows="*, *, *" columns="*, *" class="list-group-item-content">
-                    <Label [text]="entry.description" class="text-primary"></Label>
+                    <Label [text]="entry.name" class="text-primary"></Label>
                     <Label col="1" horizontalAlignment="right" class="list-group-item-text m-r-5">
                         <FormattedString>
                             <Span text="$"></Span>
