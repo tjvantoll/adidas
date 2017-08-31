@@ -1,5 +1,7 @@
 <ActionBar class="action-bar">
-    <ActionItem ios.position="right" [text]="'fa-shopping-cart' | fonticon" (tap)="onCartTap()" class="fa"></ActionItem>
+    <ActionItem (tap)="onCartTap()" ios.position="right">
+        <Button [text]="'fa-shopping-basket' | fonticon" class="fa"></Button>
+    </ActionItem>
     <Label class="action-bar-title" text="Products" horizontalAlignment="center"></Label>
 </ActionBar>
 
