@@ -4,7 +4,7 @@
 </ActionBar>
 
 <GridLayout class="page">
-    <RadListView [items]="products" (itemTap)="onProductItemTap($event)" class="list-group">
+    <RadListView [items]="products" (itemTap)="onProductItemTap($event)" class="list-group" (itemLoading)="changeBackground($event)">
         <ListViewGridLayout tkListViewLayout scrollDirection="Vertical" itemHeight="200" spanCount="2"></ListViewGridLayout>
         <ng-template tkListItemTemplate let-product="item">
             <StackLayout class="product-card list-group-item">

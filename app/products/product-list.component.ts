@@ -1,3 +1,5 @@
+import { Color } from "color";
+import { isIOS } from "platform";
 import { Component, OnInit } from "@angular/core";
 import { ObservableArray } from "data/observable-array";
 import { RouterExtensions } from "nativescript-angular/router";
@@ -51,5 +53,13 @@ export class ProductListComponent implements OnInit {
 
     onCartTap() {
         this._routerExtensions.navigate(["/products/cart"]);
+    }
+
+    changeBackground(args){
+        if (isIOS) {
+            // A lovely pink 😄
+            var newcolor = new Color(20,255,56,89);
+            args.ios.backgroundView.backgroundColor = newcolor.ios;
+        }
     }
 }
