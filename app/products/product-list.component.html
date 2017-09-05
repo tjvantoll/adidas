@@ -1,28 +1,42 @@
 <ActionBar class="action-bar">
+    <ActionItem (tap)="onMenuTap()" ios.position="left">
+        <Button text="Menu"></Button>
+    </ActionItem>
     <ActionItem (tap)="onCartTap()" ios.position="right">
-        <Button [text]="'fa-shopping-basket' | fonticon" class="fa"></Button>
+        <!-- Commenting out until we can get the icons working -->
+        <!--<Button [text]="'fa-shopping-basket' | fonticon" class="fa"></Button>-->
+        <Button text="Cart"></Button>
     </ActionItem>
     <Label class="action-bar-title" text="Products" horizontalAlignment="center"></Label>
 </ActionBar>
 
-<GridLayout class="page">
-    <RadListView [items]="products" (itemTap)="onProductItemTap($event)" class="list-group" (itemLoading)="changeBackground($event)">
-        <ListViewGridLayout tkListViewLayout scrollDirection="Vertical" itemHeight="200" spanCount="2"></ListViewGridLayout>
-        <ng-template tkListItemTemplate let-product="item">
-            <StackLayout class="product-card">
-                <Image [src]="product.imageSource" height="154"></Image>
-                <StackLayout row="1" colSpan="2" class="hr-light m-t-5 m-b-5"></StackLayout>
-                <GridLayout rows="20, 15" columns="3*, auto">
-                    <Label col="0" row="0" [text]="product.name" class="text-primary"></Label>
-                    <Label col="1" row="0" horizontalAlignment="left" class="list-group-item-text m-r-5">
+<RadSideDrawer showOverNavigation="true" tkExampleTitle tkToggleNavButton>
+    <StackLayout tkDrawerContent class="sidedrawer-left">
+        <StackLayout class="sidedrawer-content">
+            <Label class="h1" text="Filter products"></Label>
+
+        </StackLayout>
+    </StackLayout>
+    <GridLayout class="page" tkMainContent>
+        <RadListView [items]="products" (itemTap)="onProductItemTap($event)" class="list-group" (itemLoading)="changeBackground($event)">
+            <ListViewGridLayout tkListViewLayout scrollDirection="Vertical" itemHeight="200" spanCount="2"></ListViewGridLayout>
+            <ng-template tkListItemTemplate let-product="item">
+                <StackLayout class="product-card">
+                    <Image [src]="product.imageSource" height="154"></Image>
+                    <StackLayout row="1" colSpan="2" class="hr-light m-t-5 m-b-5"></StackLayout>
+                    <GridLayout rows="20, 15" columns="3*, auto">
+                        <Label col="0" row="0" [text]="product.name" class="text-primary"></Label>
+                        <Label col="1" row="0" horizontalAlignment="left" class="list-group-item-text m-r-5">
                             <FormattedString>
                                 <Span text="$"></Span>
                                 <Span [text]="product.price"></Span>
                             </FormattedString>
                         </Label>
-                </GridLayout>
-            </StackLayout>
-        </ng-template>
-    </RadListView>
-    <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
-</GridLayout>
+                    </GridLayout>
+                </StackLayout>
+            </ng-template>
+        </RadListView>
+        <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
+    </GridLayout>
+</RadSideDrawer>
+

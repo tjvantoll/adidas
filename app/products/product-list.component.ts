@@ -1,9 +1,11 @@
 import { Color } from "color";
 import { isIOS } from "platform";
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 import { ObservableArray } from "data/observable-array";
 import { RouterExtensions } from "nativescript-angular/router";
 import { ListViewEventData } from "nativescript-telerik-ui-pro/listview";
+import { RadSideDrawer } from "nativescript-telerik-ui-pro/sidedrawer";
+import { RadSideDrawerComponent } from "nativescript-telerik-ui-pro/sidedrawer/angular";
 
 import { Product } from "./shared/product.model";
 import { ProductService } from "./shared/product.service";
@@ -13,9 +15,12 @@ import { ProductService } from "./shared/product.service";
     moduleId: module.id,
     templateUrl: "./product-list.component.html"
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, AfterViewInit {
     private _isLoading: boolean;
     private _products: ObservableArray<Product>;
+
+    @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
+    private drawer: RadSideDrawer;
 
     constructor(
         private _productService: ProductService,
@@ -37,6 +42,10 @@ export class ProductListComponent implements OnInit {
             });
     }
 
+    ngAfterViewInit() {
+        this.drawer = this.drawerComponent.sideDrawer;
+    }
+
     get products(): ObservableArray<Product> {
         return this._products;
     }
@@ -55,9 +64,12 @@ export class ProductListComponent implements OnInit {
         this._routerExtensions.navigate(["/products/cart"]);
     }
 
+    onMenuTap() {
+        this.drawer.showDrawer();
+    }
+
     changeBackground(args){
         if (isIOS) {
-            // A lovely pink 😄
             var newcolor = new Color(100,211,211,211);
             args.ios.backgroundView.backgroundColor = newcolor.ios;
         }

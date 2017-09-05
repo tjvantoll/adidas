@@ -4,6 +4,7 @@ import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { NativeScriptUIChartModule } from "nativescript-telerik-ui-pro/chart/angular";
 import { NativeScriptUIDataFormModule } from "nativescript-telerik-ui-pro/dataform/angular";
 import { NativeScriptUIListViewModule } from "nativescript-telerik-ui-pro/listview/angular";
+import { NativeScriptUISideDrawerModule } from "nativescript-telerik-ui-pro/sidedrawer/angular";
 
 import { ProductsRoutingModule } from "./products-routing.module";
 
@@ -26,6 +27,7 @@ import {TNSFontIconModule, TNSFontIconService, TNSFontIconPipe, TNSFontIconPureP
         NativeScriptUIDataFormModule,
         NativeScriptUIChartModule,
         NativeScriptUIListViewModule,
+        NativeScriptUISideDrawerModule,
         TNSFontIconModule.forRoot({
             'fa': 'fonts/font-awesome.css'
         })
