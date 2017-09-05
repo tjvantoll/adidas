@@ -1,8 +1,6 @@
 {
-  "description": "NativeScript Application",
-  "license": "SEE LICENSE IN <your-license-filename>",
-  "readme": "NativeScript Application",
-  "repository": "<fill-your-repository-here>",
+  "description": "Home of the world’s premier NativeScript swag distributor",
+  "repository": "https://github.com/tjvantoll/nadidas",
   "nativescript": {
     "id": "org.nativescript.myKinveyApp",
     "tns-ios": {
