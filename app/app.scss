@@ -20,11 +20,9 @@
   font-family: FontAwesome, fontawesome-webfont;
 }
 
-//Action bar
-.action-item,
-NavigationButton {
+.blue {
+    background-color: $ab-background;
     color: $ab-color;
-
 }
 
 Slider{
@@ -73,6 +71,7 @@ Label {
 .nav-label {
     font-size: 20;
     color: $blue-dark;
+    background-color: white;
     font-weight: bold;
     padding: 20;
 }
