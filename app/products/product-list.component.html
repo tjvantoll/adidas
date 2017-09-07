@@ -30,40 +30,24 @@
     </StackLayout>
 
     <GridLayout class="page" tkMainContent>
-        <!--<RadListView [items]="products" (itemTap)="onProductItemTap($event)" class="list-group" (itemLoading)="changeBackground($event)">
-            <ListViewGridLayout tkListViewLayout scrollDirection="Vertical" itemHeight="200" spanCount="2"></ListViewGridLayout>
-            <ng-template tkListItemTemplate let-product="item">
-                <StackLayout class="product-card">
-                    <Image [src]="product.imageSource" height="154"></Image>
-                    <StackLayout row="1" colSpan="2" class="hr-light m-t-5 m-b-5"></StackLayout>
-                    <GridLayout rows="20, 15" columns="3*, auto">
-                        <Label col="0" row="0" [text]="product.name" class="text-primary"></Label>
-                        <Label col="1" row="0" horizontalAlignment="left" class="list-group-item-text m-r-5">
-                            <FormattedString>
-                                <Span text="$"></Span>
-                                <Span [text]="product.price"></Span>
-                            </FormattedString>
-                        </Label>
-                    </GridLayout>
-                </StackLayout>
-            </ng-template>
-        </RadListView>-->
         <ScrollView class="gray">
-            <WrapLayout class="p-t-5" horizontalAlignment="center">
-                <StackLayout class="product-card" width="46%" *ngFor="let product of products$" (tap)="onProductItemTap(product._id)">
-                    <Image stretch="aspectFill"  [src]="product.imageSource" height="85%" width="100%"></Image>
-                    
-                    <GridLayout rows="20, 15" columns="3*, auto" class="info-box">
-                        <Label col="0" row="0" [text]="product.name" class="text-primary"></Label>
-                        <Label col="1" row="0" horizontalAlignment="left">
-                            <FormattedString>
-                                <Span class="text-price" text="$"></Span>
-                                <Span class="text-price" [text]="product.price"></Span>
-                            </FormattedString>
-                        </Label>
-                    </GridLayout>
-                </StackLayout>
-            </WrapLayout> 
+            <PullToRefresh (refresh)="refreshList($event)">
+                <WrapLayout class="p-t-5" horizontalAlignment="center">
+                    <StackLayout class="product-card" width="46%" *ngFor="let product of products$" (tap)="onProductItemTap(product._id)">
+                        <Image stretch="aspectFill"  [src]="product.imageSource" height="85%" width="100%"></Image>
+                        
+                        <GridLayout rows="20, 15" columns="3*, auto" class="info-box">
+                            <Label col="0" row="0" [text]="product.name" class="text-primary"></Label>
+                            <Label col="1" row="0" horizontalAlignment="left">
+                                <FormattedString>
+                                    <Span class="text-price" text="$"></Span>
+                                    <Span class="text-price" [text]="product.price"></Span>
+                                </FormattedString>
+                            </Label>
+                        </GridLayout>
+                    </StackLayout>
+                </WrapLayout> 
+            </PullToRefresh>
         </ScrollView>
         <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
     </GridLayout>

@@ -8,6 +8,9 @@ import { ListViewEventData } from "nativescript-telerik-ui-pro/listview";
 import { RadSideDrawer } from "nativescript-telerik-ui-pro/sidedrawer";
 import { RadSideDrawerComponent } from "nativescript-telerik-ui-pro/sidedrawer/angular";
 
+import { registerElement } from "nativescript-angular/element-registry";
+registerElement("PullToRefresh", () => require("nativescript-pulltorefresh").PullToRefresh);
+
 import { Product } from "./shared/product.model";
 import { ProductService } from "./shared/product.service";
 
@@ -31,7 +34,6 @@ export class ProductListComponent implements OnInit, AfterViewInit {
         // Initialize default values.
         this._products = new ObservableArray<Product>([]);
         this._isLoading = false;
-        
     }
 
     ngOnInit(): void {
@@ -76,5 +78,9 @@ export class ProductListComponent implements OnInit, AfterViewInit {
             var newcolor = new Color(100,211,211,211);
             args.ios.backgroundView.backgroundColor = newcolor.ios;
         }
+    }
+
+    refreshList() {
+        console.log("oh hi!");
     }
 }
