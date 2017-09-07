@@ -19,6 +19,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
     public products$: Observable<any>;
     public isLoading: boolean;
+    private pullToRefresh;
 
     constructor(
         private _productService: ProductService,
@@ -38,6 +39,10 @@ export class ProductListComponent implements OnInit, AfterViewInit {
             .subscribe((products: Observable<Product>) => {
                 this.products$ = products;
                 this.isLoading = false;
+
+                if (this.pullToRefresh) {
+                    this.pullToRefresh.refreshing = false;
+                }
             });
     }
 
@@ -60,11 +65,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     }
 
     refreshList(args) {
-        var pullRefresh = args.object;
-
-        // This totally doesn’t work
-        this.loadProducts().add(() => {
-            pullRefresh.refreshing = false;
-        })
+        this.pullToRefresh = args.object;
+        this.loadProducts();
     }
 }
