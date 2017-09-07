@@ -57,10 +57,10 @@ export class ProductListComponent implements OnInit, AfterViewInit {
         return this._isLoading;
     }
 
-    onProductItemTap(args: ListViewEventData): void {
-        const tappedProductItem = args.view.bindingContext;
+    onProductItemTap(id): void {
+        //const tappedProductItem = args.view.bindingContext;
 
-        this._routerExtensions.navigate(["/products/detail", tappedProductItem._id]);
+        this._routerExtensions.navigate(["/products/detail", id]);
     }
 
     onCartTap() {
