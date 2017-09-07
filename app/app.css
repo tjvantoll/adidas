@@ -1,4 +1,5 @@
 @import 'nativescript-theme-core/css/core.light.css';
+@import url("~/platform.css");
 
 /*fonticon*/
 .action-bar {
