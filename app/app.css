@@ -1,0 +1,73 @@
+@import 'nativescript-theme-core/css/core.light.css';
+
+/*fonticon*/
+.fa {
+  font-family: FontAwesome, fontawesome-webfont;
+}
+
+.action-bar, .action-bar-title {
+    font-family: "Comfortaa";
+}
+
+Label {
+    font-family: "Comfortaa";
+}
+
+.text {
+    color: #022734;
+}
+
+.text-primary {
+    color: #3A53FF;
+    font-size: 13;
+}
+
+.text-secondary {
+    color: rgba(58,83,255,50);
+}
+.text-price {
+    font-size: 13;
+}
+.list-group label {
+    font-size: 12;
+    padding: 5;
+}
+
+.product-card {
+    background-color: white;
+    border-radius: 2;
+    margin: 5;
+    height: 250;
+}
+
+.info-box {
+    padding: 5;
+}
+
+/*side drawer*/
+/*nav*/
+.nav-label {
+    font-size: 20;
+    color: #022734;
+    background-color: white;
+    font-weight: bold;
+    padding: 20;
+}
+
+.nav-layout{
+    text-align: left;
+}
+
+.hr{
+    height:1;
+    background-color: #022734;
+    width: 100%
+}
+
+.white {
+    background-color: white;
+}
+
+.gray {
+    background-color: lightgray;
+}
