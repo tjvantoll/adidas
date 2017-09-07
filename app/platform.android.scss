@@ -9,3 +9,8 @@
 @import '~nativescript-theme-core/scss/platforms/index.android';
 
 // Place any CSS rules you want to apply only on Android here
+
+.blue {
+    background-color: $ab-background;
+    color: $ab-color;
+}
