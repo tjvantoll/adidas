@@ -49,23 +49,20 @@
             </ng-template>
         </RadListView>-->
         <ScrollView class="gray">
-            <WrapLayout horizontalAlignment="center">      
-                <StackLayout class="product-card" width="45%" *ngFor="let product of products$">
-                    <StackLayout rows="auto,*" (tap)="onProductItemTap(product._id)">
-                        <Image stretch="aspectFill"  [src]="product.imageSource" height="85%" width="100%"></Image>            
-                        
-                        <GridLayout rows="20, 15" columns="3*, auto" class="info-box">
-                            <Label col="0" row="0" [text]="product.name" class="text-primary"></Label>
-                            <Label col="1" row="0" horizontalAlignment="left">
-                                <FormattedString>
-                                    <Span class="text-price" text="$"></Span>
-                                    <Span class="text-price" [text]="product.price"></Span>
-                                </FormattedString>
-                            </Label>
-                        </GridLayout>
+            <WrapLayout class="p-t-5" horizontalAlignment="center">
+                <StackLayout class="product-card" width="46%" *ngFor="let product of products$" (tap)="onProductItemTap(product._id)">
+                    <Image stretch="aspectFill"  [src]="product.imageSource" height="85%" width="100%"></Image>
                     
-                    </StackLayout>
-                </StackLayout>           
+                    <GridLayout rows="20, 15" columns="3*, auto" class="info-box">
+                        <Label col="0" row="0" [text]="product.name" class="text-primary"></Label>
+                        <Label col="1" row="0" horizontalAlignment="left">
+                            <FormattedString>
+                                <Span class="text-price" text="$"></Span>
+                                <Span class="text-price" [text]="product.price"></Span>
+                            </FormattedString>
+                        </Label>
+                    </GridLayout>
+                </StackLayout>
             </WrapLayout> 
         </ScrollView>
         <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
