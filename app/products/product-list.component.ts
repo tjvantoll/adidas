@@ -2,6 +2,7 @@ import { Color } from "color";
 import { isIOS } from "platform";
 import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 import { ObservableArray } from "data/observable-array";
+import { Observable } from "rxjs/Observable";
 import { RouterExtensions } from "nativescript-angular/router";
 import { ListViewEventData } from "nativescript-telerik-ui-pro/listview";
 import { RadSideDrawer } from "nativescript-telerik-ui-pro/sidedrawer";
@@ -21,6 +22,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
     @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
     private drawer: RadSideDrawer;
+    public products$: Observable<any>;
 
     constructor(
         private _productService: ProductService,
@@ -29,6 +31,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
         // Initialize default values.
         this._products = new ObservableArray<Product>([]);
         this._isLoading = false;
+        
     }
 
     ngOnInit(): void {
@@ -36,8 +39,8 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
         this._productService.load()
             .finally(() => this._isLoading = false)
-            .subscribe((products: Array<Product>) => {
-                this._products = new ObservableArray(products);
+            .subscribe((products: Observable<Product>) => {
+                this.products$ = products;
                 this._isLoading = false;
             });
     }
