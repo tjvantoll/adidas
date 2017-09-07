@@ -67,7 +67,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     }
 
     onMenuTap() {
-        this.drawer.showDrawer();
+        this.drawer.toggleDrawerState();
     }
 
     changeBackground(args){
