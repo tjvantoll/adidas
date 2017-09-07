@@ -1,9 +1,14 @@
 @import 'nativescript-theme-core/css/core.light.css';
 
 /*fonticon*/
-.fa {
-  font-family: FontAwesome, fontawesome-webfont;
+.action-bar {
+    background-color: #3A53FF;
+    color: white;
 }
+
+.fa {
+    font-family: FontAwesome, fontawesome-webfont;
+  }
 
 .action-bar, .action-bar-title {
     font-family: "Comfortaa";
