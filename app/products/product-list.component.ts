@@ -1,5 +1,3 @@
-import { Color } from "color";
-import { isIOS } from "platform";
 import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 import { ObservableArray } from "data/observable-array";
 import { Observable } from "rxjs/Observable";
@@ -68,13 +66,6 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
     onMenuTap() {
         this.drawer.toggleDrawerState();
-    }
-
-    changeBackground(args){
-        if (isIOS) {
-            var newcolor = new Color(100,211,211,211);
-            args.ios.backgroundView.backgroundColor = newcolor.ios;
-        }
     }
 
     refreshList() {
