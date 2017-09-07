@@ -8,9 +8,6 @@ import { ListViewEventData } from "nativescript-telerik-ui-pro/listview";
 import { RadSideDrawer } from "nativescript-telerik-ui-pro/sidedrawer";
 import { RadSideDrawerComponent } from "nativescript-telerik-ui-pro/sidedrawer/angular";
 
-import { registerElement } from "nativescript-angular/element-registry";
-registerElement("PullToRefresh", () => require("nativescript-pulltorefresh").PullToRefresh);
-
 import { Product } from "./shared/product.model";
 import { ProductService } from "./shared/product.service";
 

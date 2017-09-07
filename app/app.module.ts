@@ -5,7 +5,8 @@ import { NSModuleFactoryLoader } from "nativescript-angular/router";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import {TNSFontIconModule, TNSFontIconService, TNSFontIconPipe, TNSFontIconPurePipe} from 'nativescript-ngx-fonticon';
-
+import { registerElement } from "nativescript-angular/element-registry";
+registerElement("PullToRefresh", () => require("nativescript-pulltorefresh").PullToRefresh);
 
 @NgModule({
     bootstrap: [
