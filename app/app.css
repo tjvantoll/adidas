@@ -13,6 +13,9 @@
 .action-bar, .action-bar-title {
     font-family: "Comfortaa";
 }
+.action-bar .fa {
+    font-size: 20;
+}
 
 Label {
     font-family: "Comfortaa";

@@ -1,8 +1,10 @@
 <ActionBar class="action-bar">
-    <ActionItem (tap)="onMenuTap()" ios.position="left" android.position="left">
+    <NavigationButton ios:visibility="collapsed" [text]="'fa-bars' | fonticon" (tap)="onMenuTap()"></NavigationButton>
+
+    <ActionItem (tap)="onMenuTap()" ios.position="left" android:visibility="collapsed">
         <Button [text]="'fa-bars' | fonticon" class="fa blue"></Button>
     </ActionItem>
-    <ActionItem (tap)="onCartTap()" ios.position="right" android.position="right">
+    <ActionItem (tap)="onCartTap()" ios.position="right">
         <Button [text]="'fa-shopping-cart' | fonticon" class="fa blue"></Button>
     </ActionItem>
     <Label class="action-bar-title" text="Products" horizontalAlignment="center"></Label>
@@ -16,7 +18,7 @@
     </StackLayout>
 
     <StackLayout tkDrawerContent class="white">
-        <Image src="~/images/logo.png" width="100" height="100"></Image>    
+        <Image src="~/images/logo.png" width="100" height="100"></Image>
         <StackLayout class="nav-layout">
             <Button text="{{'fa-search' | fonticon}} Search Products" class="fa nav-label"></Button>
             <StackLayout class="hr"></StackLayout>
