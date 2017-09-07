@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
-import { ObservableArray } from "data/observable-array";
 import { Observable } from "rxjs/Observable";
 import { RouterExtensions } from "nativescript-angular/router";
 import { ListViewEventData } from "nativescript-telerik-ui-pro/listview";
@@ -15,43 +14,35 @@ import { ProductService } from "./shared/product.service";
     templateUrl: "./product-list.component.html"
 })
 export class ProductListComponent implements OnInit, AfterViewInit {
-    private _isLoading: boolean;
-    private _products: ObservableArray<Product>;
-
     @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
     private drawer: RadSideDrawer;
+
     public products$: Observable<any>;
+    public isLoading: boolean;
 
     constructor(
         private _productService: ProductService,
         private _routerExtensions: RouterExtensions
     ) {
         // Initialize default values.
-        this._products = new ObservableArray<Product>([]);
-        this._isLoading = false;
+        this.isLoading = false;
     }
 
     ngOnInit(): void {
-        this._isLoading = true;
+        this.isLoading = true;
+        this.loadProducts();
+    }
 
-        this._productService.load()
-            .finally(() => this._isLoading = false)
+    loadProducts() {
+        return this._productService.load()
             .subscribe((products: Observable<Product>) => {
                 this.products$ = products;
-                this._isLoading = false;
+                this.isLoading = false;
             });
     }
 
     ngAfterViewInit() {
         this.drawer = this.drawerComponent.sideDrawer;
-    }
-
-    get products(): ObservableArray<Product> {
-        return this._products;
-    }
-
-    get isLoading(): boolean {
-        return this._isLoading;
     }
 
     onProductItemTap(id): void {
@@ -68,7 +59,12 @@ export class ProductListComponent implements OnInit, AfterViewInit {
         this.drawer.toggleDrawerState();
     }
 
-    refreshList() {
-        console.log("oh hi!");
+    refreshList(args) {
+        var pullRefresh = args.object;
+
+        // This totally doesn’t work
+        this.loadProducts().add(() => {
+            pullRefresh.refreshing = false;
+        })
     }
 }
