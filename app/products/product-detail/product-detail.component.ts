@@ -56,11 +56,8 @@ export class ProductDetailComponent implements OnInit {
 
     addToCart() {
         this.isLoading = true;
-        this._shoppingCartService.add(this._product._id)
-            .subscribe(() => {
-                this.isLoading = false;
-            }, () => {
-                this.isLoading = false;
-            })
+        this._shoppingCartService
+        .add(this._product._id)
+        .then(() => this.isLoading = false);
     }
 }
