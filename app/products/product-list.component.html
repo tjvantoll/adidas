@@ -1,5 +1,5 @@
 <ActionBar class="action-bar">
-    <NavigationButton ios:visibility="collapsed" [text]="'fa-bars' | fonticon" (tap)="onMenuTap()"></NavigationButton>
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onMenuTap()"></NavigationButton>
 
     <ActionItem (tap)="onMenuTap()" ios.position="left" android:visibility="collapsed">
         <Button [text]="'fa-bars' | fonticon" class="fa blue"></Button>
