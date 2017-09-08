@@ -63,6 +63,8 @@ Label {
     background-color: white;
     font-weight: bold;
     padding: 20;
+    border-color: transparent;
+    border-width: 1;
 }
 
 .nav-layout{
