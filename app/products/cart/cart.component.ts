@@ -57,4 +57,8 @@ export class CartComponent implements OnInit {
     checkout() {
         this._routerExtensions.navigate(["/products/checkout"]);
     }
+
+    onBackButtonTap(): void {
+        this._routerExtensions.navigate(["/products"], { clearHistory: true });
+    }
 }

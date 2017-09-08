@@ -19,6 +19,11 @@
     border-color: transparent;
     border-width: 1;
 }
+.action-bar Button {
+    background-color: transparent;
+    border-color: transparent;
+    border-width: 1;
+}
 
 Label {
     font-family: "Comfortaa";
