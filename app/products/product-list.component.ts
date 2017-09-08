@@ -31,19 +31,19 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
     ngOnInit(): void {
         this.isLoading = true;
+        this.products$ = this._productService.products$;
         this.loadProducts();
     }
 
     loadProducts() {
-        return this._productService.load()
-            .subscribe((products: Observable<Product>) => {
-                this.products$ = products;
-                this.isLoading = false;
-
-                if (this.pullToRefresh) {
-                    this.pullToRefresh.refreshing = false;
-                }
-            });
+        this._productService.load()
+        .then(() => {
+            this.isLoading = false;
+            
+            if (this.pullToRefresh) {
+                this.pullToRefresh.refreshing = false;
+            }
+        });
     }
 
     ngAfterViewInit() {

@@ -8,7 +8,7 @@
 </ActionBar>
 
 <GridLayout class="page">
-    <ListView [items]="cartEntries" class="list-group">
+    <ListView [items]="cartEntries$ | async" class="list-group">
         <ng-template let-entry="item">
             <StackLayout class="list-group-item">
                 <GridLayout rows="*, *, *" columns="*, *" class="list-group-item-content">
