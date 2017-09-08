@@ -36,7 +36,7 @@
 
             <ScrollView class="gray">
                 <WrapLayout class="p-t-5" horizontalAlignment="center">
-                    <StackLayout class="product-card" width="46%" *ngFor="let product of products$" (tap)="onProductItemTap(product._id)">
+                    <StackLayout class="product-card" width="46%" *ngFor="let product of products$ | async" (tap)="onProductItemTap(product._id)">
                         <Image stretch="aspectFill"  [src]="product.imageSource" height="85%" width="100%"></Image>
                         
                         <GridLayout rows="20, 15" columns="3*, auto" class="info-box">

@@ -4,7 +4,7 @@
 </ActionBar>
 
 <GridLayout class="page">
-    <RadListView [items]="cartEntries" class="list-group">
+    <RadListView [items]="cartEntries$ | async" class="list-group">
         <ng-template tkListItemTemplate let-entry="item">
             <StackLayout class="list-group-item">
                 <GridLayout rows="*, *, *" columns="*, *" class="list-group-item-content">
