@@ -24,6 +24,7 @@
     "@angular/router": "~4.2.0",
     "kinvey-nativescript-sdk": "^3.7.2",
     "nativescript-angular": "~4.2.0",
+    "nativescript-ar": "file:nativescript-ar-0.0.3.tgz",
     "nativescript-custom-entitlements": "0.2.0",
     "nativescript-imagepicker": "^3.0.6",
     "nativescript-ngx-fonticon": "^2.2.3",

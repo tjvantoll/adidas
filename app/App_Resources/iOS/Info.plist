@@ -48,5 +48,7 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+  <key>NSCameraUsageDescription</key>
+  <string>To augment reality.</string>
 </dict>
 </plist>

@@ -37,6 +37,15 @@ export class ProductService {
                 allProducts.push(new Product(product));
             });
 
+            // Temporary hack for testing.
+            allProducts.push(new Product({
+                name: "Jumbo Stress Cube",
+                description: "A NativeScript-themed stress ball that is bigger than your dog. What will you do with this? Buy one and find out!",
+                imageSource: "https://i.imgur.com/ORWAyRz.png",
+                price: "999",
+                _id: "999999"
+            }));
+
             this.productsDataSubject.next(allProducts);
         })
         .catch(this.handleErrors);

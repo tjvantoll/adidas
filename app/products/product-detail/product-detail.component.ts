@@ -60,4 +60,8 @@ export class ProductDetailComponent implements OnInit {
         .add(this._product._id)
         .then(() => this.isLoading = false);
     }
+
+    preview() {
+        this._routerExtensions.navigate(["/products/ar"]);
+    }
 }

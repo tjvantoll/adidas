@@ -12,6 +12,7 @@ import { CartComponent } from "./cart/cart.component";
 import { ProductDetailComponent } from "./product-detail/product-detail.component";
 import { ProductListComponent } from "./product-list.component";
 import { CheckoutComponent } from "./checkout/checkout.component";
+import { ArComponent } from "./ar/ar.component";
 
 import { ProductService } from "./shared/product.service";
 import { ShoppingCartService } from "./shared/shoppingcart.service";
@@ -36,7 +37,8 @@ import {TNSFontIconModule, TNSFontIconService, TNSFontIconPipe, TNSFontIconPureP
         CartComponent,
         ProductListComponent,
         ProductDetailComponent,
-        CheckoutComponent
+        CheckoutComponent,
+        ArComponent
     ],
     providers: [
         ProductService,

@@ -27,6 +27,9 @@
             <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
         </GridLayout>
 
+        <Button class="btn btn-primary btn-rounded-lg" text="Preview in Reality" (tap)="preview()"
+            [visibility]="product.name === 'Jumbo Stress Cube' ? 'visible' : 'collapse'"></Button>
+
         <Label class="p-l-15 p-b-10 m-t-15 h2" text="Reviews" textDecoration="underline"></Label>
         <RadCartesianChart height="300" class="m-b-20 m-x-10">
             <CategoricalAxis tkCartesianHorizontalAxis></CategoricalAxis>
