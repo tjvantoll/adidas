@@ -19,11 +19,11 @@ export class ProductDetailComponent implements OnInit {
 
     // Randomize review data for demo purposes
     reviews = new ObservableArray([
-        { Rating: "1 ⭐", Amount: Math.floor(Math.random() * 20) },
-        { Rating: "2 ⭐", Amount: Math.floor(Math.random() * 20) },
-        { Rating: "3 ⭐", Amount: Math.floor(Math.random() * 20) },
-        { Rating: "4 ⭐", Amount: Math.floor(Math.random() * 20) },
-        { Rating: "5 ⭐", Amount: Math.floor(Math.random() * 20) }
+        { Rating: "1 ⭐", Amount: 5 },
+        { Rating: "2 ⭐", Amount: 10 },
+        { Rating: "3 ⭐", Amount: 5 },
+        { Rating: "4 ⭐", Amount: 20 },
+        { Rating: "5 ⭐", Amount: 30 }
     ]);
 
     constructor(
