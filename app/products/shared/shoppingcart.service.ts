@@ -13,12 +13,12 @@ import { ShoppingCart } from "./shoppingcart.model";
 @Injectable()
 export class ShoppingCartService {
   private cartStore = Kinvey.DataStore.collection<ShoppingCart>("ShoppingCart", Kinvey.DataStoreType.Sync);
-  //private rootCartId = "59b96359cca6b7d768450225";
   private rootCart:ShoppingCart = null;
 
   private dataSubject: BehaviorSubject<CartItem[]> = new BehaviorSubject([]);
 
   constructor() {
+    this.loadCart();
     startMonitoring((newConnectionType: number) => {
       if (newConnectionType != connectionType.none) {
         this.syncDataStore();
@@ -35,11 +35,10 @@ export class ShoppingCartService {
       .then(() => this.cartStore.sync())
       .then(() => this.cartStore.find().toPromise())
       .then(data => {
-        //let cart: ShoppingCart = null;
         if (data != null && data.length > 0){
-          this.rootCart = data[0];
+          this.rootCart = new ShoppingCart(data[0]);
         }
-        return new ShoppingCart(this.rootCart);
+        return this.rootCart;
     });
   }
 
@@ -53,17 +52,14 @@ export class ShoppingCartService {
   }
 
   add(productId: string): Promise<any> {
-    return this.loadCart()
-      .then(cart => {
-        cart.addProduct(productId);
-        
-        return this.cartStore.save({
-          _id: this.rootCart._id,
-          products: cart.products
-        })
-        .then((data) => this.dataSubject.next(data.products));
-      })
-      .catch(this.handleErrors);
+    this.rootCart.addProduct(productId);
+
+    return this.cartStore.save({
+      _id: this.rootCart._id,
+      products: this.rootCart.products
+    })
+    .then((data) => this.dataSubject.next(data.products))
+    .catch(this.handleErrors);
   }
 
   reset() {
@@ -90,7 +86,6 @@ export class ShoppingCartService {
         return Kinvey.User.login(Config.kinveyUsername, Config.kinveyPassword);
     }
   }
-
 
   private handleErrors(error: Response) {
     console.log(error);
