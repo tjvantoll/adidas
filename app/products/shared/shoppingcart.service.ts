@@ -1,20 +1,29 @@
+import { startMonitoring, connectionType } from "tns-core-modules/connectivity";
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
+import { Kinvey } from "kinvey-nativescript-sdk";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Subject, Observable } from "rxjs/Rx";
 
-import { Kinvey } from "kinvey-nativescript-sdk";
 import { Config } from "../../shared/config";
-import { ShoppingCart } from "./shoppingcart.model";
-import { Product } from "./product.model";
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { CartItem } from "./cart-item.model";
+import { Product } from "./product.model";
+import { ShoppingCart } from "./shoppingcart.model";
 
 @Injectable()
 export class ShoppingCartService {
-  private cartStore = Kinvey.DataStore.collection<ShoppingCart>("ShoppingCart");
+  private cartStore = Kinvey.DataStore.collection<ShoppingCart>("ShoppingCart", Kinvey.DataStoreType.Sync);
   private rootCartId = "59b96359cca6b7d768450225";
 
   private dataSubject: BehaviorSubject<CartItem[]> = new BehaviorSubject([]);
+
+  constructor() {
+    startMonitoring((newConnectionType: number) => {
+      if (newConnectionType != connectionType.none) {
+        this.syncDataStore();
+      }
+    });
+  }
 
   public get cartItems$(): Observable<CartItem[]> {
     return this.dataSubject;
@@ -22,16 +31,16 @@ export class ShoppingCartService {
 
   private loadCart(): Promise<ShoppingCart> {
     return this.login()
-    .then(() => this.syncDataStore())
-    .then(() => this.cartStore.find().toPromise())
-    .then(data => {
-      let cart: ShoppingCart = null;
+      .then(() => this.syncDataStore())
+      .then(() => this.cartStore.find().toPromise())
+      .then(data => {
+        let cart: ShoppingCart = null;
 
-      data.forEach(entry => {
-        if (entry._id == this.rootCartId) {
-          cart = entry;
-        }
-      });
+        data.forEach(entry => {
+          if (entry._id == this.rootCartId) {
+            cart = entry;
+          }
+        });
 
       return new ShoppingCart(cart);
     });
@@ -48,18 +57,30 @@ export class ShoppingCartService {
 
   add(productId: string): Promise<any> {
     return this.loadCart()
-    .then(cart => {
-      cart.addProduct(productId);
-      
-      return this.cartStore.save({
-        _id: this.rootCartId,
-        products: cart.products
+      .then(cart => {
+        cart.addProduct(productId);
+        
+        return this.cartStore.save({
+          _id: this.rootCartId,
+          products: cart.products
+        })
+        .then((data) => this.dataSubject.next(data.products));
       })
-      .then((data) => this.dataSubject.next(data.products));
-    })
-    .catch(this.handleErrors);
+      .catch(this.handleErrors);
   }
 
+  reset() {
+    this.cartStore.clear();
+    return this.loadCart()
+      .then(cart => {
+        return this.cartStore.save({
+          _id: this.rootCartId,
+          products: []
+        })
+        .then((data) => this.dataSubject.next(data.products));
+      })
+      .catch(this.handleErrors);
+  }
 
   private syncDataStore() {
     return this.cartStore.pendingSyncEntities()

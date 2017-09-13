@@ -7,6 +7,7 @@ import { RadSideDrawerComponent } from "nativescript-telerik-ui-pro/sidedrawer/a
 
 import { Product } from "./shared/product.model";
 import { ProductService } from "./shared/product.service";
+import { ShoppingCartService } from "./shared/shoppingcart.service";
 
 @Component({
     selector: "product-list",
@@ -23,6 +24,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
     constructor(
         private _productService: ProductService,
+        private _cartService: ShoppingCartService,
         private _routerExtensions: RouterExtensions
     ) {
         // Initialize default values.
@@ -67,5 +69,9 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     refreshList(args) {
         this.pullToRefresh = args.object;
         this.loadProducts();
+    }
+
+    demo() {
+        this._cartService.reset();
     }
 }
