@@ -13,7 +13,8 @@ import { ShoppingCart } from "./shoppingcart.model";
 @Injectable()
 export class ShoppingCartService {
   private cartStore = Kinvey.DataStore.collection<ShoppingCart>("ShoppingCart", Kinvey.DataStoreType.Sync);
-  private rootCartId = "59b96359cca6b7d768450225";
+  //private rootCartId = "59b96359cca6b7d768450225";
+  private rootCart:ShoppingCart = null;
 
   private dataSubject: BehaviorSubject<CartItem[]> = new BehaviorSubject([]);
 
@@ -31,18 +32,14 @@ export class ShoppingCartService {
 
   private loadCart(): Promise<ShoppingCart> {
     return this.login()
-      .then(() => this.syncDataStore())
+      .then(() => this.cartStore.sync())
       .then(() => this.cartStore.find().toPromise())
       .then(data => {
-        let cart: ShoppingCart = null;
-
-        data.forEach(entry => {
-          if (entry._id == this.rootCartId) {
-            cart = entry;
-          }
-        });
-
-      return new ShoppingCart(cart);
+        //let cart: ShoppingCart = null;
+        if (data != null && data.length > 0){
+          this.rootCart = data[0];
+        }
+        return new ShoppingCart(this.rootCart);
     });
   }
 
@@ -61,7 +58,7 @@ export class ShoppingCartService {
         cart.addProduct(productId);
         
         return this.cartStore.save({
-          _id: this.rootCartId,
+          _id: this.rootCart._id,
           products: cart.products
         })
         .then((data) => this.dataSubject.next(data.products));
@@ -74,7 +71,7 @@ export class ShoppingCartService {
     return this.loadCart()
       .then(cart => {
         return this.cartStore.save({
-          _id: this.rootCartId,
+          _id: this.rootCart._id,
           products: []
         })
         .then((data) => this.dataSubject.next(data.products));
@@ -83,28 +80,7 @@ export class ShoppingCartService {
   }
 
   private syncDataStore() {
-    return this.cartStore.pendingSyncEntities()
-      .then((pendingEntities: any[]) => {
-        let queue = Promise.resolve();
-
-        if (pendingEntities && pendingEntities.length) {
-            queue = queue
-                .then(() => this.cartStore.push())
-                .then((entities: Kinvey.PushResult<ShoppingCart>[]) => {
-
-                    /* ***********************************************************
-                    * Each item in the array of pushed entities will look like the following
-                    * { _id: '<entity id before push>', entity: <entity after push> }
-                    * It could also possibly have an error property if the push failed.
-                    * { _id: '<entity id before push>', entity: <entity after push>, error: <reason push failed> }
-                    * Learn more about in this documentation article:
-                    * http://devcenter.kinvey.com/nativescript/guides/datastore#push
-                    *************************************************************/
-                });
-        }
-
-        return queue;
-    });
+    return this.cartStore.sync();
   }
 
   private login(): Promise<any> {
