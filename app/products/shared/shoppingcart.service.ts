@@ -12,19 +12,13 @@ import { CartItem } from "./cart-item.model";
 @Injectable()
 export class ShoppingCartService {
   private cartStore = Kinvey.DataStore.collection<ShoppingCart>("ShoppingCart");
-  private rootCartId = "59b95a6449665b910c56bab8";
+  private rootCartId = "59b96359cca6b7d768450225";
 
   private dataSubject: BehaviorSubject<CartItem[]> = new BehaviorSubject([]);
 
   public get cartItems$(): Observable<CartItem[]> {
     return this.dataSubject;
   }
-
-  /*public getById(id) {
-    return this.dataSubject.value.filter((product) => {
-        return product._id === id;
-    })[0];
-  }*/
 
   private loadCart(): Promise<ShoppingCart> {
     return this.login()
