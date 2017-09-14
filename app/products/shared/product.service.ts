@@ -26,20 +26,31 @@ export class ProductService {
 
     load(): Promise<any> {
         return this.login()
-        .then(() => this.syncDataStore())
-        .then(() => {
-            const productStream: Observable<Product[]> = this.productsStore.find();
-            return productStream.toPromise();
-        })
-        .then((data: Product[]) => {
-            const allProducts: Product[] = [];
-            data.forEach((product) => {
-                allProducts.push(new Product(product));
-            });
+            .then(() => this.syncDataStore())
+            .then(() => {
+                const productStream: Observable<Product[]> = this.productsStore.find();
+                return productStream.toPromise();
+            })
+            .then((data: Product[]) => {
+                const allProducts: Product[] = [];
+                data.forEach((product) => {
+                    allProducts.push(new Product(product));
+                });
 
-            this.productsDataSubject.next(allProducts);
-        })
-        .catch(this.handleErrors);
+                this.productsDataSubject.next(allProducts);
+            })
+            .catch(this.handleErrors);
+    }
+
+    switchUsers() {
+        return Kinvey.User.logout()
+            .then(() => {
+                Config.kinveyUsername = Config.kinveyUsername == "jen" ? "tj" : "jen";
+                return Kinvey.User.login(Config.kinveyUsername, Config.kinveyPassword)
+                    .then(() => {
+                        return this.load();
+                    });
+            });
     }
 
     private syncDataStore(): Promise<any> {

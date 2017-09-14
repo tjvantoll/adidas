@@ -29,6 +29,10 @@
             <Button text="{{'fa-heart' | fonticon}} Feedback" class="fa nav-label" (tap)="demo()"></Button>
             <StackLayout class="hr"></StackLayout>
         </StackLayout>
+        <GridLayout>
+            <Label [text]="'Hi ' + user + '!'" class="h2 text-center" (tap)="switchUsers()"></Label>
+            <ActivityIndicator [busy]="userSwitching"></ActivityIndicator>
+        </GridLayout>
     </StackLayout>
 
     <GridLayout class="page" tkMainContent>

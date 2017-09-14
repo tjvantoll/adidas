@@ -5,6 +5,7 @@ import { ListViewEventData } from "nativescript-telerik-ui-pro/listview";
 import { RadSideDrawer } from "nativescript-telerik-ui-pro/sidedrawer";
 import { RadSideDrawerComponent } from "nativescript-telerik-ui-pro/sidedrawer/angular";
 
+import { Config } from "../shared/config";
 import { Product } from "./shared/product.model";
 import { ProductService } from "./shared/product.service";
 import { ShoppingCartService } from "./shared/shoppingcart.service";
@@ -21,6 +22,8 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     public products$: Observable<any>;
     public isLoading: boolean;
     private pullToRefresh;
+    public userSwitching: boolean;
+    public user: string;
 
     constructor(
         private _productService: ProductService,
@@ -29,6 +32,8 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     ) {
         // Initialize default values.
         this.isLoading = false;
+        this.userSwitching = false;
+        this.user = Config.kinveyUsername;
     }
 
     ngOnInit(): void {
@@ -73,5 +78,13 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
     demo() {
         this._cartService.reset();
+    }
+
+    switchUsers() {
+        this.userSwitching = true;
+        this._productService.switchUsers().then(() => {
+            this.user = Config.kinveyUsername;
+            this.userSwitching = false;
+        })
     }
 }
