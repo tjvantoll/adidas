@@ -1,10 +1,10 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
-import { NativeScriptUIChartModule } from "nativescript-telerik-ui-pro/chart/angular";
-import { NativeScriptUIDataFormModule } from "nativescript-telerik-ui-pro/dataform/angular";
-import { NativeScriptUIListViewModule } from "nativescript-telerik-ui-pro/listview/angular";
-import { NativeScriptUISideDrawerModule } from "nativescript-telerik-ui-pro/sidedrawer/angular";
+import { NativeScriptUIChartModule } from "nativescript-pro-ui/chart/angular";
+import { NativeScriptUIDataFormModule } from "nativescript-pro-ui/dataform/angular";
+import { NativeScriptUIListViewModule } from "nativescript-pro-ui/listview/angular";
+import { NativeScriptUISideDrawerModule } from "nativescript-pro-ui/sidedrawer/angular";
 
 import { ProductsRoutingModule } from "./products-routing.module";
 

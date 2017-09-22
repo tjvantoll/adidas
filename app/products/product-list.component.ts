@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { RouterExtensions } from "nativescript-angular/router";
-import { ListViewEventData } from "nativescript-telerik-ui-pro/listview";
-import { RadSideDrawer } from "nativescript-telerik-ui-pro/sidedrawer";
-import { RadSideDrawerComponent } from "nativescript-telerik-ui-pro/sidedrawer/angular";
+import { ListViewEventData } from "nativescript-pro-ui/listview";
+import { RadSideDrawer } from "nativescript-pro-ui/sidedrawer";
+import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 
 import { Config } from "../shared/config";
 import { Product } from "./shared/product.model";
