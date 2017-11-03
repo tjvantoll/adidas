@@ -1,6 +1,6 @@
 # {N}adidas sample
 
-A work-in-progress app for NativeScript Developer Day demos.
+A sample app used to demo [NativeScript](https://www.nativescript.org/) and [Kinvey](https://www.kinvey.com/) at [NativeScript Developer Day](http://developerday.nativescript.org/).
 
 ## Running
 
