@@ -47,9 +47,18 @@ export class ArComponent implements OnInit {
     
   planeTapped(args: ARPlaneTappedEventData): void {
     var position = args.position;
-    this.ar.addCube({
-      material: "granitesmooth",
-      position: {x: position.x, y: position.y + 0.7, z: position.z},
+    this.ar.addBox({
+      materials: ["Assets.scnassets/Materials/granitesmooth/granitesmooth-normal.png"],
+      position: {
+        x: position.x,
+        y: position.y + 0.7,
+        z: position.z
+      },
+      dimensions: {
+        x: 0.25,
+        y: 0.25,
+        z: 0.25
+      },
       scale: 0.1,
       mass: 20,
       onLongPress: ((model: ARNode) => {
