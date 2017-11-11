@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
+import { Color } from "tns-core-modules/color";
 import { PropertyChangeData } from "tns-core-modules/data/observable";
 
-import { AR, ARDebugLevel, ARNode, ARPlaneTappedEventData, ARPosition } from "nativescript-ar";
+import { AR, ARDebugLevel, ARNode, ARPlaneTappedEventData, ARPosition, ARMaterial } from "nativescript-ar";
 import { registerElement } from "nativescript-angular/element-registry";
 registerElement("AR", () => require("nativescript-ar").AR);
 
@@ -15,9 +16,12 @@ registerElement("AR", () => require("nativescript-ar").AR);
 <GridLayout rows="auto, *">
     <Label row="0" [text]="hint" class="hint" textWrap="true"></Label>
     <AR row="1"
-        (arLoaded)="arLoaded($event)"
-        (planeDetected)="planeDetected($event)"
-        (planeTapped)="planeTapped($event)">
+      debugLevel="FEATURE_POINTS"
+      detectPlanes="true"
+      [planeMaterial]="planeMaterial"
+      (arLoaded)="arLoaded($event)"
+      (planeDetected)="planeDetected($event)"
+      (planeTapped)="planeTapped($event)">
     </AR>
 </GridLayout>
 `
@@ -25,6 +29,10 @@ registerElement("AR", () => require("nativescript-ar").AR);
 export class ArComponent implements OnInit {
   private ar: AR;
   private firstPlaneDetected: boolean = false;
+  public planeMaterial = <ARMaterial>{
+    diffuse: new Color("white"),
+    transparency: 0.2
+  };
 
   hint: string;
   isSupported: boolean;
@@ -48,19 +56,23 @@ export class ArComponent implements OnInit {
   planeTapped(args: ARPlaneTappedEventData): void {
     var position = args.position;
     this.ar.addBox({
-      materials: ["Assets.scnassets/Materials/granitesmooth/granitesmooth-normal.png"],
+      materials: [{
+        diffuse: {
+          contents: "Assets.scnassets/Materials/granitesmooth/granitesmooth-normal.png",
+          wrapMode: "ClampToBorder"
+        }
+      }],
       position: {
         x: position.x,
         y: position.y + 0.7,
         z: position.z
       },
       dimensions: {
-        x: 0.25,
-        y: 0.25,
-        z: 0.25
+        x: 0.1,
+        y: 0.1,
+        z: 0.1
       },
-      scale: 0.1,
-      mass: 20,
+      mass: 10,
       onLongPress: ((model: ARNode) => {
         model.remove();
       })
